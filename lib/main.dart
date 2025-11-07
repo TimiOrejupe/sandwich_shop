@@ -17,6 +17,9 @@ class App extends StatelessWidget {
         appBar: AppBar(title: const Text('Sandwich Counter')),
         body: Center(
           child: Container(
+            color: Colors.blue,
+            width: 48.0
+            height: 48.0,
             child: const OrderItemDisplay(5, 'Footlong'),
           )
         ),
@@ -25,7 +28,7 @@ class App extends StatelessWidget {
   }
 }
 
-Container({required OrderItemDisplay child} )
+// ignore: non_constant_identifier_names
 class OrderItemDisplay extends StatelessWidget {
   final int quantity;
   final String itemType;
