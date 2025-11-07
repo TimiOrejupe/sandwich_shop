@@ -8,39 +8,39 @@ void main() {
 class App extends StatelessWidget {
   const App({super.key});
 
-// ignore: non_constant_identifier_names
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Sandwich Shop App',
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Sandwich Counter')),
+        body: const Center(
+          child: OrderItemDisplay(5, 'Footlong'),
+        ),
+      ),
+    );
+  }
+}
+
 class OrderItemDisplay extends StatelessWidget {
-  final String itemType;
   final int quantity;
+  final String itemType;
 
   const OrderItemDisplay(this.quantity, this.itemType, {super.key});
 
   @override
-Widget build(BuildContext context) {
-  return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
-}
+  Widget build(BuildContext context) {
+    return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
   }
 }
 
-  @override
-Widget build(BuildContext context) {
-  return MaterialApp(
-    title: 'Sandwich Shop App',
-    home: Scaffold(
-      appBar: AppBar(title: const Text('Sandwich Counter')),
-      body: const Center(
-        child: OrderItemDisplay(5, 'Footlong'),
-      ),
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
 
 
 
+
+// ignore: non_constant_identifier_names
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -66,32 +66,24 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
+      // so that the display can reflect the updated values.
       _counter++;
     });
   }
 
-  
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
+        title: Text(widget.title),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-  // Here we take the value from the MyHomePage object that was created by
-  // the App.build method, and use it to set our appbar title.
-  title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-   
-  
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            OrderItemDisplay(_counter, 'Footlong'),
+            const SizedBox(height: 16),
             const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',
@@ -104,10 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    ) {
-       // TODO: implement Scaffold
-       throw UnimplementedError();
-     }
+      ),
+    );
   }
 }
+
