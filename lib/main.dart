@@ -15,14 +15,17 @@ class App extends StatelessWidget {
       title: 'Sandwich Shop App',
       home: Scaffold(
         appBar: AppBar(title: const Text('Sandwich Counter')),
-        body: const Center(
-          child: OrderItemDisplay(5, 'Footlong'),
+        body: Center(
+          child: Container(
+            child: const OrderItemDisplay(5, 'Footlong'),
+          )
         ),
       ),
     );
   }
 }
 
+Container({required OrderItemDisplay child} )
 class OrderItemDisplay extends StatelessWidget {
   final int quantity;
   final String itemType;
