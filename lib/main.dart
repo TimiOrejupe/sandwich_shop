@@ -18,8 +18,8 @@ class App extends StatelessWidget {
         body: Center(
           child: Container(
             color: Colors.blue,
-            width: 48.0
-            height: 48.0,
+            width: 100.0,
+            height: 100.0,
             child: const OrderItemDisplay(5, 'Footlong'),
           )
         ),
