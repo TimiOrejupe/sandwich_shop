@@ -16,8 +16,11 @@ class App extends StatelessWidget {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const OrderItemDisplay(5, 'Footlong'),
+            children: <Widget>[ 
+              OrderItemDisplay(
+                _quantity,
+                'Footlong',
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
