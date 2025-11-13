@@ -4,10 +4,8 @@ void main() {
   runApp(const App());
 }
 
-
 class App extends StatelessWidget {
   const App({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +14,31 @@ class App extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: const Text('Sandwich Counter')),
         body: Center(
-          child: Container(
-            color: Colors.blue,
-            width: 100.0,
-            height: 100.0,
-            child: const OrderItemDisplay(5, 'Footlong'),
-          )
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const OrderItemDisplay(5, 'Footlong'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => print('Add button pressed'),
+                    child: const Text('Add'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => print('Remove button pressed'),
+                    child: const Text('Remove'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-// ignore: non_constant_identifier_names
 class OrderItemDisplay extends StatelessWidget {
   final int quantity;
   final String itemType;
@@ -40,6 +50,9 @@ class OrderItemDisplay extends StatelessWidget {
     return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
   }
 }
+
+
+
 
 
 
