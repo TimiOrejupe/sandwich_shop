@@ -9,38 +9,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Sandwich Shop App',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Sandwich Counter')),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[ 
-              OrderItemDisplay(
-                _quantity,
-                'Footlong',
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () => print('Add button pressed'),
-                    child: const Text('Add'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => print('Remove button pressed'),
-                    child: const Text('Remove'),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+      home: OrderScreen(maxQuantity: 5),
     );
   }
-}
+ }      
 
 class OrderScreen extends StatefulWidget {
   final int maxQuantity;
@@ -62,6 +36,50 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 }
 
+
+
+
+
+
+
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+      title: const Text('Sandwich Counter')
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            OrderItemDisplay(
+               _quantity,
+              'Footlong',
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: _increaseQuantity,
+                  child: const Text('Add'),
+                )
+                ElevatedButton(
+                  onPressed: _decreaseQuantity,
+                 child: const Text('Remove'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class OrderItemDisplay extends StatelessWidget {
   final int quantity;
   final String itemType;
@@ -73,27 +91,6 @@ class OrderItemDisplay extends StatelessWidget {
     return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
   }
 }
-
-
-
-
-
-
-
-
-
-// ignore: non_constant_identifier_names
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
