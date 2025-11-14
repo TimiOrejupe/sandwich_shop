@@ -14,7 +14,7 @@ class App extends StatelessWidget {
       home: OrderScreen(maxQuantity: 5),
     );
   }
- }      
+}
 
 class OrderScreen extends StatefulWidget {
   final int maxQuantity;
@@ -30,50 +30,47 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
 
-void _increaseQuantity() {
-  if (_quantity < widget.maxQuantity) {
-    setState(() => _quantity++);
+  void _increaseQuantity() {
+    if (_quantity < widget.maxQuantity) {
+      setState(() => _quantity++);
+    }
   }
-}
 
-void _decreaseQuantity() {
-  if (_quantity > 0) {
-    setState(() => _quantity--);
+  void _decreaseQuantity() {
+    if (_quantity > 0) {
+      setState(() => _quantity--);
+    }
   }
-}
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      title: const Text('Sandwich Counter')
-      ),
+      appBar: AppBar(title: const Text('Sandwich Counter')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            OrderItemDisplay(
-               _quantity,
-              'Footlong',
-            ),
+            OrderItemDisplay(_quantity, 'Footlong'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-          StyledButton(
-            onPressed: _quantity < widget.maxQuantity ? _increaseQuantity : null,
-             child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const[
-                        Icon(Icons.add),
-                        SizedBox(width: 8),
-                        Text('Add'),                  
-                      ],
-                     )
-                      ),
+                StyledButton(
+                  onPressed: _quantity < widget.maxQuantity
+                      ? _increaseQuantity
+                      : null,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.add),
+                      SizedBox(width: 8),
+                      Text('Add'),
+                    ],
+                  ),
+                ),
                 const SizedBox(width: 8),
                 StyledButton(
                   onPressed: _quantity > 0 ? _decreaseQuantity : null,
-                 child: const Text('Remove'),
+                  child: const Text('Remove'),
                 ),
               ],
             ),
@@ -88,12 +85,7 @@ class StyledButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget child;
 
-
-  const StyledButton({
-    this.onPressed,
-    required this.child,
-    super.key,
-  });
+  const StyledButton({this.onPressed, required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +111,3 @@ class OrderItemDisplay extends StatelessWidget {
     return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
   }
 }
-
-
- 
-
