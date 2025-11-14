@@ -59,12 +59,20 @@ void _decreaseQuantity() {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: _increaseQuantity,
-                  child: const Text('Add'),
-                ),
-                ElevatedButton(
-                  onPressed: _decreaseQuantity,
+          StyledButton(
+            onPressed: _quantity < widget.maxQuantity ? _increaseQuantity : null,
+             child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const[
+                        Icon(Icons.add),
+                        SizedBox(width: 8),
+                        Text('Add'),
+                      ],
+                     )
+                      ),
+                const SizedBox(width: 8),
+                StyledButton(
+                  onPressed: _quantity > 0 ? _decreaseQuantity : null,
                  child: const Text('Remove'),
                 ),
               ],
@@ -72,6 +80,25 @@ void _decreaseQuantity() {
           ],
         ),
       ),
+    );
+  }
+}
+
+class StyledButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final Widget child;
+
+  const StyledButton({this.onPressed, required this.child, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        textStyle: const TextStyle(fontSize: 18),
+      ),
+      child: child,
     );
   }
 }
