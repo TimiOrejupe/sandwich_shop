@@ -41,22 +41,7 @@ void _decreaseQuantity() {
     setState(() => _quantity--);
   }
 }
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold()
-  }
-}
-
-
-
-
-
-
-
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +62,7 @@ class MyHomePage extends StatefulWidget {
                 ElevatedButton(
                   onPressed: _increaseQuantity,
                   child: const Text('Add'),
-                )
+                ),
                 ElevatedButton(
                   onPressed: _decreaseQuantity,
                  child: const Text('Remove'),
@@ -103,51 +88,6 @@ class OrderItemDisplay extends StatelessWidget {
   }
 }
 
-  final String title;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            OrderItemDisplay(_counter, 'Footlong'),
-            const SizedBox(height: 16),
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
+ 
 
