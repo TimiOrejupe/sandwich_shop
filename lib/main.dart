@@ -66,7 +66,7 @@ void _decreaseQuantity() {
                       children: const[
                         Icon(Icons.add),
                         SizedBox(width: 8),
-                        Text('Add'),
+                        Text('Add'),                  
                       ],
                      )
                       ),
@@ -88,7 +88,12 @@ class StyledButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget child;
 
-  const StyledButton({this.onPressed, required this.child, super.key});
+
+  const StyledButton({
+    this.onPressed,
+    required this.child,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
