@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'views/app_styles.dart';
+import 'package:sandwich_shop/views/app_styles.dart';
+import 'package:sandwich_shop/repositories/order_repository.dart';
 
 enum BreadType { white, wheat, wholemeal }
 
@@ -31,7 +32,7 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  int _quantity = 0;
+  late final OrderRepository _orderRepository;
   final TextEditingController _notesController = TextEditingController();
   bool _isFootlong = true;
   BreadType _selectedBreadType = BreadType.white;
@@ -39,55 +40,10 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   void initState() {
     super.initState();
+    _orderRepository = OrderRepository(maxQuantity: widget.maxQuantity);
     _notesController.addListener(() {
       setState(() {});
     });
-  }
-
-  @override
-  void dispose() {
-    _notesController.dispose();
-    super.dispose();
-  }
-
-  VoidCallback? _getIncreaseCallback() {
-    if (_quantity < widget.maxQuantity) {
-      return () {
-        setState(() => _quantity++);
-      };
-    }
-    return null;
-  }
-
-  VoidCallback? _getDecreaseCallback() {
-    if (_quantity > 0) {
-      return () {
-        setState(() => _quantity--);
-      };
-    }
-    return null;
-  }
-
-  void _onSandwichTypeChanged(bool value) {
-    setState(() => _isFootlong = value);
-  }
-
-  void _onBreadTypeSelected(BreadType? value) {
-    if (value != null) {
-      setState(() => _selectedBreadType = value);
-    }
-  }
-
-  List<DropdownMenuEntry<BreadType>> _buildDropdownEntries() {
-    List<DropdownMenuEntry<BreadType>> entries = [];
-    for (BreadType bread in BreadType.values) {
-      DropdownMenuEntry<BreadType> newEntry = DropdownMenuEntry<BreadType>(
-        value: bread,
-        label: bread.name,
-      );
-      entries.add(newEntry);
-    }
-    return entries;
   }
 
   @override
@@ -116,7 +72,7 @@ class _OrderScreenState extends State<OrderScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             OrderItemDisplay(
-              quantity: _quantity,
+              quantity: _orderRepository.quantity,
               itemType: sandwichType,
               breadType: _selectedBreadType,
               orderNote: noteForDisplay,
