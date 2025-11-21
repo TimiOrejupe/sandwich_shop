@@ -29,6 +29,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
+  String _selectedType = 'Footlong';
 
   void _increaseQuantity() {
     if (_quantity < widget.maxQuantity) {
@@ -50,6 +51,29 @@ class _OrderScreenState extends State<OrderScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              title: const Text('Footlong'),
+              value: _selectedType == 'Footlong',
+              onChanged: (bool? value) {
+                setState(() {
+                  if (value == true) {
+                    _selectedType = 'Footlong';
+                  }
+                });
+              },
+            ),            CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              title: const Text('Six-inch'),
+              value: _selectedType == 'Six-inch',
+              onChanged: (bool? value) {
+                setState(() {
+                  if (value == true) {
+                    _selectedType = 'Six-inch';
+                  }
+                });
+              },
+            ),  
             OrderItemDisplay(_quantity, 'Footlong'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
