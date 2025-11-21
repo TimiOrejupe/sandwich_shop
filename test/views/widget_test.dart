@@ -88,7 +88,7 @@ void main() {
       // initial state should be footlong
       expect(find.text('0 white footlong sandwich(es): '), findsOneWidget);
 
-      final Finder sizeSwitch = find.byType(Switch);
+      final Finder sizeSwitch = find.byKey(const Key('size_switch'));
       expect(sizeSwitch, findsOneWidget);
 
       // toggle to six-inch
