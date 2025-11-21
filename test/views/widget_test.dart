@@ -74,15 +74,35 @@ void main() {
           find.textContaining('wholemeal footlong sandwich'), findsOneWidget);
     });
 
-    testWidgets('updates note with TextField', (WidgetTester tester) async {
+       testWidgets('updates note with TextField', (WidgetTester tester) async {
       await tester.pumpWidget(const App());
       await tester.enterText(
           find.byKey(const Key('notes_textfield')), 'Extra mayo');
       await tester.pump();
       expect(find.text('Note: Extra mayo'), findsOneWidget);
     });
-  });
 
+    testWidgets('toggles sandwich size using Switch', (WidgetTester tester) async {
+      await tester.pumpWidget(const App());
+
+      // initial state should be footlong
+      expect(find.text('0 white footlong sandwich(es): '), findsOneWidget);
+
+      final Finder sizeSwitch = find.byType(Switch);
+      expect(sizeSwitch, findsOneWidget);
+
+      // toggle to six-inch
+      await tester.tap(sizeSwitch);
+      await tester.pump();
+      expect(find.text('0 white six-inch sandwich(es): '), findsOneWidget);
+
+      // toggle back to footlong
+      await tester.tap(sizeSwitch);
+      await tester.pump();
+      expect(find.text('0 white footlong sandwich(es): '), findsOneWidget);
+    });
+  });
+  
   group('StyledButton', () {
     testWidgets('renders with icon and label', (WidgetTester tester) async {
       const testButton = StyledButton(
