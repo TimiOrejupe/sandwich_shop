@@ -52,19 +52,9 @@ class _OrderScreenState extends State<OrderScreen> {
     super.dispose();
   }
 
-  VoidCallback? _getIncreaseCallback() {
-    if (_orderRepository.canIncrement) {
-      return () => setState(_orderRepository.increment);
-    }
-    return null;
-  }
+  
 
-  VoidCallback? _getDecreaseCallback() {
-    if (_orderRepository.canDecrement) {
-      return () => setState(_orderRepository.decrement);
-    }
-    return null;
-  }
+
 
   void _onSandwichTypeChanged(bool value) {
     setState(() => _isFootlong = value);
@@ -102,15 +92,17 @@ class _OrderScreenState extends State<OrderScreen> {
       noteForDisplay = _notesController.text;
     }
 
-    final int currentQuantity = _orderRepository.quantity; // assumes OrderRepository exposes `quantity`
     final double total = _pricingRepository.totalPrice(
-      quantity: currentQuantity,
       isFootlong: _isFootlong,
     );
     final String totalText = 'Total: £${total.toStringAsFixed(2)}';
 
     return Scaffold(
       appBar: AppBar(
+  leading: SizedBox(
+    height: 100,
+    child: Image.asset('assets/images/logo.png'),
+  ),
         title: const Text(
           'Sandwich Counter',
           style: heading1,
@@ -126,7 +118,7 @@ class _OrderScreenState extends State<OrderScreen> {
               style: normalText,
             ),
             OrderItemDisplay(
-              quantity: _orderRepository.quantity,
+      
               itemType: sandwichType,
               breadType: _selectedBreadType,
               orderNote: noteForDisplay,
